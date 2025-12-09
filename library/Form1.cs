@@ -1,6 +1,8 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace library
 {
@@ -27,7 +29,8 @@ namespace library
                 return;
             }
 
-            string connectionString = "server=localhost;user id=root;password=LalMysql#@;database=login;";
+            // Updated connection string: no password for root
+            string connectionString = "server=localhost;user id=root;password=;database=login;";
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -40,16 +43,17 @@ namespace library
                     cmd.Parameters.AddWithValue("@user", username);
                     cmd.Parameters.AddWithValue("@pass", password);
 
-                    MySqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows)
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        MessageBox.Show("Login Successful!");
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid username or password");
+                        if (reader.HasRows)
+                        {
+                            MessageBox.Show("Login Successful!");
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid username or password");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -87,17 +91,29 @@ namespace library
 
         private void insta_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.instagram.com/");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://www.instagram.com/",
+                UseShellExecute = true
+            });
         }
 
         private void wtsp_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://web.whatsapp.com/");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://web.whatsapp.com/",
+                UseShellExecute = true
+            });
         }
 
         private void fb_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://web.facebook.com/profile.php?id=100085644737224&sk=about");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://web.facebook.com/profile.php?id=100085644737224&sk=about",
+                UseShellExecute = true
+            });
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -113,6 +129,12 @@ namespace library
         private void txtuser_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        // Implemented signup handler (Designer previously threw NotImplementedException)
+        private void Signup_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sign up is not implemented in this build.");
         }
     }
 }

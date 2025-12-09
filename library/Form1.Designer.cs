@@ -1,5 +1,4 @@
-﻿
-namespace library
+﻿namespace library
 {
     partial class Form1
     {
@@ -163,7 +162,6 @@ namespace library
             Signup.TabIndex = 7;
             Signup.Text = "Sign up";
             Signup.UseVisualStyleBackColor = false;
-            Signup.Click += Signup_Click;
             // 
             // insta
             // 
@@ -248,11 +246,6 @@ namespace library
             ((System.ComponentModel.ISupportInitialize)fb).EndInit();
             ResumeLayout(false);
             PerformLayout();
-        }
-
-        private void Signup_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
