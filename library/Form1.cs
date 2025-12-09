@@ -38,7 +38,7 @@ namespace library
                 {
                     conn.Open();
 
-                    string query = "SELECT * FROM loginTable WHERE username=@user AND password=@pass";
+                    string query = "SELECT * FROM loginTable WHERE username=@user AND pwd=@pass";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@user", username);
                     cmd.Parameters.AddWithValue("@pass", password);
